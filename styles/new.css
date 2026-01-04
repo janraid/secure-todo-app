@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.087),
+      rgba(255, 255, 255, 0.068)
+    ),
+    url("../assets/images/maroon.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+}
+
+aside {
+  position: fixed;
+  font-family: "DM Serif Text", serif;
+}
+aside .thisone {
+  box-shadow: 0px 0px 15px rgba(62, 62, 62, 0.74);
+}
+main {
+  width: 80vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10vw;
+  color: white;
+  font-family: "TASA Orbiter", sans-serif;
+  font-style: normal;
+}

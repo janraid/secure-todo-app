@@ -1,0 +1,154 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: linear-gradient(
+    rgba(253, 118, 118, 0.723),
+    rgba(247, 217, 220, 0.682)
+  );
+}
+.flexparent {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main {
+  width: 60vw;
+  height: 65vh;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0px 0px 20px rgba(128, 128, 128, 0.504);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.right {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  background-image: url(../assets/images/cat.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+.left {
+  padding: 3em 4em;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+h1 {
+  font-family: "DM Serif Text", serif;
+  font-weight: 400;
+  font-style: normal;
+  margin-bottom: 3em;
+}
+form {
+  margin-top: 1, 2em;
+  width: 25vw;
+}
+input {
+  width: 100%;
+  height: 2.5em;
+  margin: -1em 0em 1em 0em;
+  font-family: "TASA Orbiter", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  padding: 10px 12px;
+  border: solid rgba(128, 128, 128, 0.66) 1px;
+  border-radius: 4px;
+}
+input[type="submit"] {
+  margin-top: 1em;
+  width: 100%;
+  font-family: "TASA Orbiter", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+}
+input[type="submit"]:hover {
+  background-color: rgb(32, 94, 1);
+  color: white;
+  border: solid rgb(32, 94, 1);
+  transition: 0.2s;
+}
+
+a {
+  color: rgb(32, 94, 1);
+  text-decoration: none;
+  transition: 0.3s;
+}
+a:visited {
+  color: rgb(32, 94, 1);
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(58, 170, 2);
+  transition: 0.2s;
+}
+h2 {
+  width: 30%;
+  text-align: center;
+  color: white;
+  font-size: 1.4rem;
+  font-family: "DM Serif Text", serif;
+  font-weight: 600;
+  margin: 0.4em;
+}
+p {
+  font-family: "TASA Orbiter", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* Register modal tweaks: improve spacing, alignment, and sizing */
+.modal {
+  --bs-modal-width: 420px;
+}
+.modal-dialog {
+  max-width: var(--bs-modal-width);
+  margin: 1.75rem auto;
+}
+.modal-content {
+  border-radius: 8px;
+  overflow: hidden;
+}
+.modal-header .modal-title {
+  font-family: "TASA Orbiter", sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.modal-body {
+  padding: 1.25rem 1.5rem;
+}
+.modal-body .form-label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.modal-body .form-control {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid rgba(128, 128, 128, 0.32);
+}
+.modal-footer {
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  background: transparent;
+}
+.modal .btn-primary {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+.modal .btn-secondary {
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+}

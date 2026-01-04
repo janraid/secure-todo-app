@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.overlay {
+  font-family: "DM Serif Text", serif;
+  font-weight: 900;
+  z-index: 9999;
+  position: fixed;
+  color: white;
+  bottom: 10px;
+  right: 10px;
+}
+body {
+  height: 100vh;
+  /* background: linear-gradient(
+    to left,
+    rgba(215, 255, 230, 0.723),
+    rgba(233, 255, 242, 0.902),
+    rgba(240, 252, 245, 0.925),
+    #f8f9fa
+  ); */
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.087),
+      rgba(255, 255, 255, 0.068)
+    ),
+    url("../assets/images/maroon.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+}
+
+aside {
+  position: fixed;
+  font-family: "DM Serif Text", serif;
+}
+aside .thisone {
+  box-shadow: 0px 0px 15px rgba(62, 62, 62, 0.74);
+}
+main {
+  width: 80vw;
+  margin-left: 20vw;
+  padding: 2em 3em;
+}
+header {
+  color: white;
+  font-family: "DM Serif Text", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+section {
+  font-family: "TASA Orbiter", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  /* vertical gap 10px, horizontal gap 4px */
+  gap: 10px 0px;
+  margin-top: 2em;
+  margin-left: 0;
+  grid-auto-rows: 10px;
+}
+section .card {
+  color: white;
+  box-shadow: 0px 0px 15px rgba(128, 128, 128, 0.463);
+  background-color: rgba(25, 135, 84, 0.804);
+  display: block;
+  width: 100%;
+  margin: 0;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+}
+
+.iconcont {
+  display: flex;
+  gap: 10px;
+}
+.iconcont img {
+  height: 35px;
+}
+hr {
+  margin: 1em 0em;
+}
+.list {
+  height: 17vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
