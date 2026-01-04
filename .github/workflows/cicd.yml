@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI/CD Pipeline - PHP Todo App
 
 on:
   push:
@@ -7,18 +7,32 @@ on:
     branches: ["main", "master"]
 
 jobs:
-  build-test-scan-deploy:
+  build-test-deploy:
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_DATABASE: todo
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_ROOT_PASSWORD }}
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=5s
+          --health-timeout=10s
+          --health-retries=5
 
     steps:
       # -------------------------
-      # Stage 0: Checkout
+      # Checkout code
       # -------------------------
       - name: Checkout code
         uses: actions/checkout@v4
 
       # -------------------------
-      # Stage 1: PHP Setup & Tests
+      # Set PHP environment
       # -------------------------
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -27,6 +41,30 @@ jobs:
           extensions: mysqli
           tools: composer
 
+      # -------------------------
+      # Wait for MySQL
+      # -------------------------
+      - name: Wait for MySQL
+        run: |
+          for i in {1..20}; do
+            mysql -h 127.0.0.1 -u root -p${{ secrets.DB_ROOT_PASSWORD }} -e "SELECT 1" && break
+            echo "Waiting for MySQL..."
+            sleep 3
+          done
+
+      # -------------------------
+      # Set environment variables for tests
+      # -------------------------
+      - name: Set DB env variables
+        run: |
+          echo "DB_HOST=127.0.0.1" >> $GITHUB_ENV
+          echo "DB_NAME=todo" >> $GITHUB_ENV
+          echo "DB_USER=root" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}" >> $GITHUB_ENV
+
+      # -------------------------
+      # Install dependencies & run tests
+      # -------------------------
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist
 
@@ -34,11 +72,14 @@ jobs:
         run: vendor/bin/phpunit --configuration phpunit.xml
 
       # -------------------------
-      # Stage 2: Docker Image Scan
+      # Build Docker image
       # -------------------------
       - name: Build Docker image
         run: docker build -t secure-todo-app:latest .
 
+      # -------------------------
+      # Scan Docker image
+      # -------------------------
       - name: Scan Docker image with Trivy
         uses: aquasecurity/trivy-action@0.20.0
         with:
@@ -50,7 +91,7 @@ jobs:
           severity: CRITICAL,HIGH
 
       # -------------------------
-      # Stage 3: Push Docker Image
+      # Push Docker image
       # -------------------------
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -58,12 +99,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Tag Docker image
+      - name: Tag and Push Docker image
         run: |
-          docker tag secure-todo-app:latest ${{ secrets.DOCKERHUB_USERNAME }}/secure-todo-app:${{ github.sha }}
           docker tag secure-todo-app:latest ${{ secrets.DOCKERHUB_USERNAME }}/secure-todo-app:latest
-
-      - name: Push Docker image
-        run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/secure-todo-app:${{ github.sha }}
+          docker tag secure-todo-app:latest ${{ secrets.DOCKERHUB_USERNAME }}/secure-todo-app:${{ github.sha }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/secure-todo-app:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/secure-todo-app:${{ github.sha }}
