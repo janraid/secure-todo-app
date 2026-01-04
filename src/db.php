@@ -1,21 +1,10 @@
 <?php
 
-$databaseUrl = getenv('MYSQL_URL');
-
-if ($databaseUrl) {
-    $parts = parse_url($databaseUrl);
-    $host = $parts['host'] ?? '127.0.0.1';
-    $user = $parts['user'] ?? 'root';
-    $password = $parts['pass'] ?? '';
-    $dbname = ltrim($parts['path'] ?? '', '/');
-    $port = $parts['port'] ?? 3306;
-} else {
-    $host = getenv('DB_HOST') ?: '127.0.0.1';
-    $user = getenv('DB_USER') ?: 'root';
-    $password = getenv('DB_PASSWORD') ?: '';
-    $dbname = getenv('DB_NAME') ?: 'todo';
-    $port = getenv('DB_PORT') ?: 3306;
-}
+$host = getenv('DB_HOST') ?: '127.0.0.1';
+$user = getenv('DB_USER') ?: 'root';
+$password = getenv('DB_PASSWORD') ?: '';
+$dbname = getenv('DB_NAME') ?: 'todo';
+$port = getenv('DB_PORT') ?: 3306;
 
 $conn = new mysqli($host, $user, $password, $dbname, (int) $port);
 
