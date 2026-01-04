@@ -5,7 +5,7 @@ final class DatabaseTest extends TestCase
 {
     public function testDatabaseConnection(): void
     {
-        $host = getenv('DB_HOST') ?: '127.0.0.1';
+        $host = getenv('DB_HOST') ?: 'localhost';
         $user = getenv('DB_USER') ?: 'root';
         $password = getenv('DB_PASSWORD');
         $dbname = getenv('DB_NAME') ?: 'todo';
