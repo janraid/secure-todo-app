@@ -68,6 +68,9 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist
 
+      - name: Initialize MySQL
+        run: mysql -h 127.0.0.1 -u root -p${{ secrets.DB_ROOT_PASSWORD }} todo < ./db/todo.sql
+
       - name: Run PHPUnit tests
         run: vendor/bin/phpunit --configuration phpunit.xml
 
