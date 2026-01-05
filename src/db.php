@@ -7,7 +7,6 @@ $port = getenv('DB_PORT') ?: 3306;
 
 $conn = new mysqli($host, $user, $password, $dbname, (int) $port);
 
-
 if ($conn->connect_errno) {
     error_log('DB connection failed: ' . $conn->connect_error);
     http_response_code(500);
