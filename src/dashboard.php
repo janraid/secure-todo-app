@@ -9,6 +9,7 @@ if ($conn->connect_errno) {
     exit;
 }
 
+
 $welcomeMessage = "";
 $hour = (int) date('G');
 if ($hour < 12) {
