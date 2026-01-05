@@ -62,7 +62,13 @@ jobs:
         run: mysql -h 127.0.0.1 -u root -p${{ secrets.DB_ROOT_PASSWORD }} todo < ./db/todo.sql
 
       - name: Run PHPUnit tests
-        run: vendor/bin/phpunit --configuration phpunit.xml
+        run: vendor/bin/phpunit --configuration phpunit.
+
+      # SonarQube Code Analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       # Build Docker image
       - name: Build Docker image

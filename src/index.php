@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require __DIR__ . '/db.php';
 if ($conn->connect_errno) {
   error_log('DB connection failed: ' . $conn->connect_error);
@@ -104,9 +103,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<script>alert('Username already exists.');</script>";
       } else {
         $hash = hash('sha256', $reg_pass);
-        $ins = "INSERT INTO users (username, password) VALUES (?, ?)";
+        $ins = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
         $si = mysqli_prepare($conn, $ins);
-        mysqli_stmt_bind_param($si, 'ss', $reg_user, $hash);
+        $role = 'user';
+        mysqli_stmt_bind_param($si, 'ss', $reg_user, $hash, $role);
         if (mysqli_stmt_execute($si)) {
           $_SESSION['id'] = mysqli_insert_id($conn);
           $_SESSION['username'] = $reg_user;
