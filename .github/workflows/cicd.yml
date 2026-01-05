@@ -74,16 +74,16 @@ jobs:
       - name: Build Docker image
         run: docker build -t secure-todo-app:latest .
 
-      # Scan Docker image
       - name: Scan Docker image with Trivy
-        uses: aquasecurity/trivy-action@0.20.0
-        with:
-          image-ref: secure-todo-app:latest
-          format: table
-          exit-code: "0"
-          ignore-unfixed: true
-          vuln-type: os,library
-          severity: CRITICAL,HIGH
+  uses: aquasecurity/trivy-action@b6c9d35f1e22f02cbb59c6c6e9d44dbf7f1a1c6b
+  with:
+    image-ref: secure-todo-app:latest
+    format: table
+    exit-code: "0"
+    ignore-unfixed: true
+    vuln-type: os,library
+    severity: CRITICAL,HIGH
+
 
       # Push Docker image
       - name: Log in to Docker Hub
