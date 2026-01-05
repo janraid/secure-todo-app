@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->close();
                 } else {
                     $ok = false;
+
                 }
             } else {
                 // attempt to insert due date (assumes `due` is DATE or DATETIME)
