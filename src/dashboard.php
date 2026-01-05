@@ -2,12 +2,7 @@
 session_start();
 
 require __DIR__ . '/db.php';
-if ($conn->connect_errno) {
-    error_log('DB connection failed: ' . $conn->connect_error);
-    http_response_code(500);
-    echo 'Database connection error.';
-    exit;
-}
+
 
 $welcomeMessage = "";
 $hour = (int) date('G');
@@ -18,6 +13,7 @@ if ($hour < 12) {
 } else {
     $welcomeMessage = "Good Evening";
 }
+
 
 // Handle AJAX delete requests (pop task)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete_task') {
