@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     if ($id <= 0) {
         echo json_encode(['success' => false, 'error' => 'invalid_id']);
         exit;
+
     }
     // find primary key column for tasks table
     $pk = 'id';
