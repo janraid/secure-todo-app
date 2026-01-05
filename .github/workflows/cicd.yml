@@ -62,7 +62,7 @@ jobs:
         run: mysql -h 127.0.0.1 -u root -p${{ secrets.DB_ROOT_PASSWORD }} todo < ./db/todo.sql
 
       - name: Run PHPUnit tests
-        run: vendor/bin/phpunit --configuration phpunit.
+        run: vendor/bin/phpunit --configuration phpunit.xml
 
       # SonarQube Code Analysis
       - name: SonarCloud Scan
