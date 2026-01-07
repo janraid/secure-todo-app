@@ -24,6 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         exit;
 
     }
+
+
     // find primary key column for tasks table
     $pk = 'id';
     $pkRes = $conn->query("SHOW KEYS FROM tasks WHERE Key_name = 'PRIMARY'");
