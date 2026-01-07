@@ -85,6 +85,8 @@ if ($conn->connect_errno) {
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $action = $_POST['action'] ?? 'login';
+
+  #comment
   if ($action === 'register') {
     $reg_user = trim($_POST['reg_username'] ?? '');
     $reg_pass = $_POST['reg_password'] ?? '';
