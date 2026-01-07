@@ -9,7 +9,6 @@ if ($conn->connect_errno) {
     exit;
 }
 
-
 $welcomeMessage = "";
 $hour = (int) date('G');
 if ($hour < 12) {
@@ -20,6 +19,7 @@ if ($hour < 12) {
     $welcomeMessage = "Good Evening";
 }
 
+
 // Handle AJAX delete requests (pop task)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete_task') {
     header('Content-Type: application/json');
@@ -27,7 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     if ($id <= 0) {
         echo json_encode(['success' => false, 'error' => 'invalid_id']);
         exit;
+
     }
+
+
     // find primary key column for tasks table
     $pk = 'id';
     $pkRes = $conn->query("SHOW KEYS FROM tasks WHERE Key_name = 'PRIMARY'");
